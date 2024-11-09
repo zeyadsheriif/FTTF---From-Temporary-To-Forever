@@ -6,7 +6,7 @@ Project Overview:
 FTTF is an online shopping website that provides users with options to either purchase or rent products. The project is structured to deliver functionality through dynamic and responsive UI, integrated backend, and robust database management, specifically tailored for users and administrators.
 
 
-##Team Members and Responsibilities
+Team Members and Responsibilities
 
 
 1. Zeyad Sherif	     Database	
