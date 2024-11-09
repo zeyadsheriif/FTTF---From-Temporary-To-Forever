@@ -9,19 +9,11 @@ FTTF is an online shopping website that provides users with options to either pu
 ##Team Members and Responsibilities
 
 
-Zeyad Sherif	   Database	
-
-
-Youssif Mohamed	 Frontend	
-
-
-Mohamed Osama	   Frontend	
-
-
-Sama Mohamed	   Backend	
-
-
-Farah Samir	     Backend	
+•	Zeyad Sherif	   Database	
+•	Youssif Mohamed	 Frontend
+•	Mohamed Osama	   Frontend
+•	Sama Mohamed	   Backend	
+•	Farah Samir	     Backend	
 
 
 Project Architecture:
