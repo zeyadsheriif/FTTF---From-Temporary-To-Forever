@@ -1,25 +1,35 @@
 # FTTF---From-Temporary-To-Forever
 
-#Project Overview
+##Project Overview
 
 
 FTTF is an online shopping website that provides users with options to either purchase or rent products. The project is structured to deliver functionality through dynamic and responsive UI, integrated backend, and robust database management, specifically tailored for users and administrators.
 
 
-Team Members and Responsibilities
+##Team Members and Responsibilities
 
 
 Name	Role	
 
 
-Youssif Mohamed	 Frontend	
-Mohamed Osama	   Frontend	
 Zeyad Sherif	   Database	
+
+
+Youssif Mohamed	 Frontend	
+
+
+Mohamed Osama	   Frontend	
+
+
 Sama Mohamed	   Backend	
+
+
 Farah Samir	     Backend	
 
 
-Project Architecture
+##Project Architecture
+
+
 The system follows a client-server architecture:
 •	Frontend: Built using Django for a responsive UI.
 •	Backend: Django handles server-side logic and API processing.
