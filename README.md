@@ -33,16 +33,16 @@ Scrum Setup:
 
 
 2.	Roles:
-o	Scrum Master: Facilitates scrum ceremonies and removes impediments (Sama Mohamed).
-o	Development Team: Implement features as defined in user stories (The whole team members).
+1. Scrum Master: Facilitates scrum ceremonies and removes impediments (Sama Mohamed).
+2. Development Team: Implement features as defined in user stories (The whole team members).
 
 
 3.	Scrum Ceremonies:
-o	Sprint Planning: Define the scope for the upcoming sprint.
-o	Daily Standups: A brief meeting to sync up on progress, blockers, and plans.
-o	Sprint Review: Showcase completed features to stakeholders.
-o	Sprint Retrospective: Reflect on sprint improvements.
+1. Sprint Planning: Define the scope for the upcoming sprint.
+2. Daily Standups: A brief meeting to sync up on progress, blockers, and plans.
+3. Sprint Review: Showcase completed features to stakeholders.
+4. Sprint Retrospective: Reflect on sprint improvements.
 
 
 4.	Sprint Cycles:
-o	Sprints will be a weeklong, with clear goals derived from the project’s requirements.
+Sprints will be a weeklong, with clear goals derived from the project’s requirements.
