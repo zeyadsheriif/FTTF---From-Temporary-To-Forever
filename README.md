@@ -20,8 +20,6 @@ Project Architecture:
 
 
 The system follows a client-server architecture:
-
-
 1. Frontend: Built using Django for a responsive UI.
 2. Backend: Django handles server-side logic and API processing.
 3. Database: Microsoft SQL Server stores user, product, and transaction data.
@@ -32,21 +30,17 @@ Scrum Setup:
 	Examples: User registration, adding/removing items to/from the cart, checking availability.
 
 
-2.	Roles:
-
-   
+Roles:
 1. Scrum Master: Facilitates scrum ceremonies and removes impediments (Sama Mohamed).
 2. Development Team: Implement features as defined in user stories (The whole team members).
 
 
-3.	Scrum Ceremonies:
-
-   
+Scrum Ceremonies:
 1. Sprint Planning: Define the scope for the upcoming sprint.
 2. Daily Standups: A brief meeting to sync up on progress, blockers, and plans.
 3. Sprint Review: Showcase completed features to stakeholders.
 4. Sprint Retrospective: Reflect on sprint improvements.
 
 
-4.	Sprint Cycles:
+Sprint Cycles:
 Sprints will be a weeklong, with clear goals derived from the project’s requirements.
