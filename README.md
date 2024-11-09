@@ -43,4 +43,6 @@ Scrum Ceremonies:
 
 
 Sprint Cycles:
+
+
 Sprints will be a weeklong, with clear goals derived from the project’s requirements.
