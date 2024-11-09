@@ -33,11 +33,15 @@ Scrum Setup:
 
 
 2.	Roles:
+
+   
 1. Scrum Master: Facilitates scrum ceremonies and removes impediments (Sama Mohamed).
 2. Development Team: Implement features as defined in user stories (The whole team members).
 
 
 3.	Scrum Ceremonies:
+
+   
 1. Sprint Planning: Define the scope for the upcoming sprint.
 2. Daily Standups: A brief meeting to sync up on progress, blockers, and plans.
 3. Sprint Review: Showcase completed features to stakeholders.
