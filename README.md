@@ -20,9 +20,9 @@ Project Architecture:
 
 
 The system follows a client-server architecture:
-1. Frontend: Built using Django for a responsive UI.
+1. Frontend: Built using Django for a responsive UI with HTML5 and CSS files.
 2. Backend: Django handles server-side logic and API processing.
-3. Database: Microsoft SQL Server stores user, product, and transaction data.
+3. Database: SQLITE3 file that stores user, product, and transaction data.
 
 
 Scrum Setup:
@@ -46,3 +46,31 @@ Sprint Cycles:
 
 
 Sprints will be a weeklong, with clear goals derived from the project’s requirements.
+
+
+
+The Sprint Backlog , previous sprints, and current one:
+
+
+https://trello.com/invite/b/674df84d3652be16064c3e47/ATTI902574c7c78bdbdd80c04f1927e6e20534B12227/fttf-swe-agile-board
+
+
+Work load distribution using trello software:
+
+
+https://trello.com/invite/b/674df4528b89fb5788582c47/ATTI75c5a55f47c7569dabb065c12adbda190990E32C/fttf-swe-project
+
+
+
+How to run the code:
+
+1. Download the folder
+2. open the folder in visual studio code
+3. Create a new terminal
+4. pip install django
+5. pip intsall pillow
+6. pip intsall Jazzmin
+7. python manage.py makemigrations
+8. python manage.py migrate
+9. python manage.py runserver
+10. open your browser and search for 127.0.0.1:8000 as the website run on port 8000
