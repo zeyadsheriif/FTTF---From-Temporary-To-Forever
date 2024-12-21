@@ -1,0 +1,87 @@
+{%extends 'core/base.html'%}
+
+{% block content%}
+    <main>
+      <center> <h2>Product Details</h2></center>
+        <div class="product-details"> <!--container for the product details-->
+          <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">  <!--product image-->
+          <div class="product-info">    <!--for product information-->
+            <h2>{{ product.name }}</h2>
+            <p><strong>{{ product.stock }} items left</strong></p>   <!--stock information-->
+
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                <label class="form-check-label" for="inlineRadio1">1</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                <label class="form-check-label" for="inlineRadio2">2</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" >
+                <label class="form-check-label" for="inlineRadio3">3 </label>
+              </div>
+              
+              <span>{{ product.rating }} Rating</span></p>
+            <p class="price">{{ product.price }} EGP</p>
+            <p class="description">{{ product.description }}</p>
+            <p class="description">Product Type Is: {{ product.type }}</p>
+            <div class ='row justify-content-left'>
+              <div class="col-md-2">Add To Cart Quantity:</div>
+              <div class="col-md-2">
+                <select class="form-select form-select-sm" id="qty-cart" >
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="actions">   <!--actions container-->
+              <button value = '{{product.id}}' , id = "addcart">Add to Cart</button>   <!--add to cart button-->
+            </div>
+          </div>
+        </div>
+      </main>
+  </div>
+
+  <script>
+    // check if button pressed
+    $(document).on('click', '#addcart', function(e){
+      e.preventDefault();
+      $.ajax({
+       type:'POST',
+       url: "{% url 'cart:cart_add' %}",
+       data:{ 
+           product_id: $('#addcart').val(),
+           product_qty: $('#qty-cart option:selected').text(),
+           csrfmiddlewaretoken: '{{csrf_token}}',
+           action: 'post'
+       },
+       success:function(json){
+        document.getElementById('cart_quantity').
+          textContent = json.qty
+        location.reload();
+       },
+       error: function(xhr,errmsg,err){ 
+        if(xhr.status === 401){
+          window.location.href = '/login/';
+        }
+  
+       }
+  
+      });
+  
+  
+    })
+  
+    
+  </script>
+
+{% endblock%}
+
+
+
+

@@ -1,0 +1,37 @@
+{%extends 'core/base.html'%}
+
+{% block content%}
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Contact Us</h1>
+        <p>We’d love to hear from you! Feel free to reach out via the form below.</p>
+    </section>
+
+    <!-- Contact Form Section -->
+    <main>
+        <div class="container">
+            <div class="contact-form">
+                <h2>Get in Touch</h2>
+                <form action="/contact/sent/" method="POST">
+                {% csrf_token %}
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message:</label>
+                        <textarea id="message" name="message" placeholder="Write your message here..." required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+</body>
+{% endblock%}

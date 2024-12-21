@@ -1,0 +1,29 @@
+{%extends 'core/base.html'%}
+
+{% block content%}
+
+    <main>
+      <h2 class ='row justify-content-center'> Rental Area...</h2>   <!--heading for the Category-->
+      <div class="product-grid">
+        {% for product in products %}    <!--for loop over the products-->
+          <div class="product-card">
+            <a href="{% url 'core:product_detail' product.name %}">      <!--link for productdetail page-->
+              <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">    <!--product image-->
+            </a>
+            <div class="product-info">     <!--product information-->
+              <h3>{{ product.name }}</h3>
+              <p class="price">{{ product.price }} EGP</p>
+              <button ><a href="{% url 'core:product_detail' product.name %}">view Details</a></button>    <!--button to add to cart-->
+            </div>
+          </div>
+        {% empty %}
+        {{products}}
+        </br></br></br></br></br></br></br></br>
+        <strong class ='row justify-content-center'>No Products For Rent!</strong>
+        </br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>    <!--message appears if no products are found -->
+        {% endfor %}
+      </div>
+    </main>
+  </div>
+</br></br></br></br></br></br></br></br>
+  {% endblock%}
