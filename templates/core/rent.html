@@ -1,0 +1,44 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+<main class="container my-5">
+  <div class="text-center mb-4">
+    <h2 class="fw-bold" style="color: #4C4C4C;">Rental Area...</h2>    <!--heading for the rent-->
+  </div>
+
+  <!-- Product Grid -->
+  <div class="product-grid">
+    {% for product in products %}    <!--for loop over the products-->
+    
+    <div class="col d-flex justify-content-center">
+
+      <div class="card h-100 shadow-sm text-center" style="border: none; width: 18rem;">   <!-- product card -->
+      
+        <a href="{% url 'core:product_detail' product.name %}" class="text-decoration-none">   <!--link for productdetail page-->
+          <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}" style="max-height: 200px; object-fit: contain; background-color: #F8F8F8; padding: 10px;">   <!--product image-->
+        </a>
+
+
+        <div class="card-body d-flex flex-column" style="background-color: #FFFFFF;">
+
+          <h5 class="card-title text-truncate" style="color: #4C4C4C;">{{ product.name }}</h5>      <!-- product name -->
+          <p class="card-text fw-bold" style="color: #8C8C8C;">{{ product.price }} EGP</p>       <!-- product price -->
+          
+          <div class="mt-auto">
+            <a href="{% url 'core:product_detail' product.name %}" class="btn" style="background-color: #8B572A; color: #FFFFFF; border: none;">View Details</a>     <!-- button to view product details -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    {% empty %}      <!-- if no products found -->
+    </br></br></br></br></br></br></br></br>
+    <strong class="row justify-content-center">No Products For Rent!</strong>
+    </br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+    {% endfor %}
+  </div>
+</main>
+
+{% endblock %}

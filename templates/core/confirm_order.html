@@ -1,0 +1,32 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card mx-auto shadow-lg" style="max-width: 600px; border-radius: 8px;">    <!-- card container for the form -->
+        <div class="card-body">
+            <center>
+                <h2 class="card-title mb-4">Finalize Your Order</h2>      <!-- form title -->
+                <p class="text-muted">Enter your address and phone number to complete your purchase.</p>           <!-- instructions for the user -->
+            </center>
+
+            <form method="post" action="/send_confrim_mail/">      <!-- form submission -->
+                {% csrf_token %}      <!-- CSRF token for security -->
+                <div class="mb-3">
+                    <label for="address" class="form-label">Address:</label>      <!-- label for address input -->
+                    <input type="text" id="address" name="address" class="form-control" placeholder="Enter your address" required>     <!-- address input -->
+                </div>
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Phone Number:</label>     <!-- label for number input -->
+                    <input type="text" id="phone" name="phone" class="form-control" placeholder="Enter your phone number" required>      <!-- number input -->
+                </div>
+                <center>
+                    <p class="text-muted mt-3">You are required to pay on delivery. Thank you for shopping with us!</p> <!-- payment instructions message -->
+                </center>
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn" style="background-color: #8B572A; color: white; border: none; padding: 10px 20px; font-size: 16px;">Complete Order</button>      <!-- submit button -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,155 @@
+{%extends 'core/base.html'%}
+
+{% block content%}
+    <main class="container my-5" >
+       
+        <div class="text-center mb-4">
+          <h1 class="fw-bold" style="color: #4C4C4C;">Shopping Cart...</h1>
+        </div>
+      
+        {%if cart_products%}
+        <div class="product-list">
+        {%for product in cart_products%} 
+        <div class="product-details mb-3"> <!--container for the product details-->
+          <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">  <!--product image-->
+          <div class="product-info">    <!--for product information-->
+            <h2>{{ product.name }}</h2>         <!-- product name -->
+            <p><strong>{{ product.stock }} items left</strong></p>             <!-- stock information -->
+            <p class="price">{{ product.price }} EGP</p>      <!-- product price -->
+            <div class ='row justify-content-left'>    <!-- quantity selection -->
+              <div class="col-md-2">Quantity:</div>
+              <div class="col-md-2">
+                <select class="form-select form-select-sm" id="select{{product.id}}" > 
+                    {% for key, value in quantity.items%}         <!-- loop for quantity items -->
+                    {% if key == product.id|slugify%}      <!-- check matching product id -->
+                    {{key}}
+                    <option selected>{{value}}</option>      <!-- set selected quantity -->
+                    {%endif%}
+                    {%endfor%}
+                  
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              </div>
+            </div>
+            <div class="actions">    <!-- actions container -->
+              <button type ='button' data-index="{{product.id}}" class="update-cart" >Update</button>    <!-- update button -->
+              <button type = 'button' data-index="{{product.id}}" class ="btn btn-secondary delete-cart-item">Remove</button>       <!-- remove button -->
+              
+            </div>
+               
+          </div>
+        </div>
+        {%endfor%}     
+        </div>
+
+        <div class="card text-bg-light mb">    <!-- cart total container -->
+          <div class="card-header">Cart Total:</div>     <!-- total header -->
+          <div class="card-body">  
+            <h5 class="card-title">{{ totals}} EGP <button type = 'button' data-index="{{product.id}}" class ="btn btn-secondary confirm_order">Confirm Order</button> </h5> <!-- total and confirm order button -->
+          </div>
+        </div>
+
+        {%else%}       <!-- case when cart is empty -->
+        </br></br></br>
+        <strong class ='row justify-content-center'>Your Cart Is Empty!</strong>
+            </br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+        {%endif%}
+     </main>
+<!-- Footer Section -->
+
+
+<script>
+  // function for update in cart
+   $(document).on('click', '.update-cart', function(e){
+     e.preventDefault();
+     var productid = $(this).data('index'); //gets pid
+     $.ajax({ //send data
+      type:'POST',
+      url: "/cart/update/",
+      data:{  // data sent
+          product_id: $(this).data('index'),
+          product_qty: $('#select' + productid + ' option:selected').text(),
+          csrfmiddlewaretoken: '{{csrf_token}}',
+          action: 'post'
+      },
+      success:function(json){ //reload on success
+         location.reload();
+      },
+      error: function(xhr,errmsg,err){ //check for error and reload
+       if(xhr.status === 402){
+           location.reload();
+         }
+
+      }
+
+     });
+
+
+   })
+
+ // function for remove from cart 
+ $(document).on('click', '.delete-cart-item', function(e){
+     e.preventDefault();
+     $.ajax({ //send data to the backend
+      type:'POST',
+      url: "/cart/delete/",
+      data:{ // data sent
+          product_id: $(this).data('index'),
+          csrfmiddlewaretoken: '{{csrf_token}}',
+          action: 'post'
+      },
+      success:function(json){ //reload on success
+         location.reload();
+      },
+      error: function(xhr,errmsg,err){
+
+      }
+
+     });
+
+
+   }) 
+
+
+
+// function for confirming an order 
+  $(document).on('click', '.confirm_order', function(e){
+    e.preventDefault();
+    console.log('confirm pressed')
+
+    const total = parseFloat($('.card-title').text()); //gets total
+    const data = { //data sent
+      total: total,
+      csrfmiddlewaretoken: '{{csrf_token}}',
+      action: 'post'
+      };
+    console.log('Product Rate:', total);
+    console.log('Data being sent:', data);
+
+    $.ajax({ //send data
+     type:'POST',
+     url: "{% url 'core:confirm_order' %}",
+     data:data,
+    
+
+     success:function(json){
+      console.log('request done'); // redirect to confirm order when success
+        window.location.href = '/confirm_order/'; 
+     },
+     error: function(xhr,errmsg,err){
+
+     }
+
+    });
+
+
+  })
+ 
+
+</script>
+
+{% endblock%}

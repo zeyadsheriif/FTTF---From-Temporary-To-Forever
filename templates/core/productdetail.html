@@ -1,0 +1,137 @@
+{%extends 'core/base.html'%}
+
+{% block content%}
+    <main>
+      <center> <h2>Product Details</h2></center>
+        <div class="product-details"> <!--container for the product details-->
+          <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">  <!--product image-->
+          <div class="product-info">    <!--for product information-->
+            <h2>{{ product.name }}</h2>
+            {% if product.stock == 0%}   <!-- check if the product is sold out -->
+            <p><strong>Sold out</strong></p>     <!-- sold out message -->
+            {%else%}
+            <p><strong>{{ product.stock }} items left</strong></p>   <!--stock information-->
+            {%endif%}
+              <div class="form-check form-check-inline">    <!--buttons for quantity selection -->
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="{{product.id}}" value="1">
+                <label class="form-check-label" for="inlineRadio1">1</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="{{product.id}}" value="2">
+                <label class="form-check-label" for="inlineRadio2">2</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="{{product.id}}" value="3" >
+                <label class="form-check-label" for="inlineRadio3">3 </label>
+              </div>
+              
+              <span>{{ product.rate }} Rating from {{ product.rate_count }} ratings </span></p>   <!-- product rating -->
+            <p class="price">{{ product.price }} EGP</p>
+            <p class="description">{{ product.description }}</p>
+            <p class="description">Product Type Is: {{ product.type }}</p>
+            <div class ='row justify-content-left'>
+              <div class="col-md-2">Add To Cart Quantity:</div>   <!-- label for quantity selection -->
+              <div class="col-md-2">
+                <select class="form-select form-select-sm" id="qty-cart" >
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="actions">   <!--actions container-->
+              <button value = '{{product.id}}' , id = "addcart">Add to Cart</button>   <!--add to cart button-->
+            </div>
+          </div>
+        </div>
+      </main>
+  </div>
+
+  <script>
+    // check if button pressed
+    $(document).on('click', '#addcart', function(e){
+      e.preventDefault();
+      $.ajax({ //send the data
+       type:'POST', 
+       url: "{% url 'cart:cart_add' %}",
+       data:{ //data sent to backend 
+           product_id: $('#addcart').val(), //gets product id
+           product_qty: $('#qty-cart option:selected').text(), //gets product quantity
+           csrfmiddlewaretoken: '{{csrf_token}}',
+           action: 'post'
+       },
+       success:function(json){
+        document.getElementById('cart_quantity').
+          textContent = json.qty
+        location.reload(); //reload page on success
+       },
+       error: function(xhr,errmsg,err){ 
+        if(xhr.status === 401){ //check if error is for login
+          window.location.href = '/login/';
+        }
+        if(xhr.status === 402){ // check for other error
+          location.reload();
+        }
+  
+       }
+       
+  
+      });
+  
+  
+    })
+  
+
+    $(document).on('change', 'input[name="inlineRadioOptions"]', function (e) { //on clicking on rating
+      console.log('Radio button changed');
+      e.preventDefault();
+      const product_id = $(this).attr('id'); //get pid
+      const product_rate = $(this).val(); //gets rate
+      const data = { //data sent to backend
+        product_id: product_id,
+        product_rate: product_rate,
+        csrfmiddlewaretoken: '{{csrf_token}}',
+        action: 'post'
+      };
+
+    console.log('Product ID:', product_id);
+    console.log('Product Rate:', product_rate);
+    console.log('Data being sent:', data);
+
+      $.ajax({ //send data 
+       type:'POST',
+       url: "{% url 'core:rate_product' %}",
+       data: data,
+
+       success:function(json){ //reload on success
+        console.log('rating done');
+        location.reload();
+       },
+       error: function(xhr,errmsg,err){ 
+        if(xhr.status === 400){ //error for rating twice
+          console.log('rating twice');
+          location.reload();
+        }
+        if(xhr.status === 401){
+          window.location.href = '/login/'; //check if error is for login
+        }
+
+  
+       }
+       
+  
+      });
+  
+  
+    })
+    
+  </script>
+
+{% endblock%}
+
+
+
+
